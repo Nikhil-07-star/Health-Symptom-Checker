@@ -48,23 +48,15 @@ powershell
 pip install -r requirements.txt
 
 
-4) Configure your Gemini API key (choose ONE)
-
-- Option A: Streamlit secrets (recommended for Streamlit Cloud and local)
+4) Configure your Gemini API key
     - Create a file at .streamlit/secrets.toml with:
     
-        toml
         GEMINI_API_KEY = "your_api_key_here"
         
     - check_models.py expects the key here.
 
-- Option B: Environment variable (works for app.py locally)
-  
-    powershell
-    $env:GEMINI_API_KEY = "your_api_key_here"
-    
 
-Note: app.py reads the key from the GEMINI_API_KEY environment variable. check_models.py reads from Streamlit secrets.
+    
 
 ## Run the app
 
@@ -90,8 +82,7 @@ This utility loads GEMINI_API_KEY from Streamlit secrets and displays usable gen
 ## Troubleshooting
 
 - Missing API key
-    - app.py requires the GEMINI_API_KEY environment variable.
-    - check_models.py requires the key in .streamlit/secrets.toml.
+    - app.py and check_models.py requires the GEMINI_API_KEY in .streamlit/secrets.toml.
 
 - “The model did not return valid JSON”
     - The app tries to parse the model output as JSON. If parsing fails, the raw response is shown.
@@ -109,8 +100,3 @@ This utility loads GEMINI_API_KEY from Streamlit secrets and displays usable gen
 
 - Streamlit handles the UI, eventing, and rendering — no separate web server is needed.
 - On “Analyze”, app.py calls Gemini with a strict JSON schema, renders severity/conditions/guidance/confidence, and shows a disclaimer.
-- templates/index.html is a legacy artifact for a Flask version with a /check endpoint; there is no Flask app in this repo wiring it up.
-
-## License
-
-MIT (or your chosen license). Update this section if you adopt a different license.
